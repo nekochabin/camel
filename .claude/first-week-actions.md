@@ -3,6 +3,15 @@
 > 目標: 最小構成で運用をスタートし、無理なく習慣化する。
 > 3日間で基盤を整え、残り4日で実際に使いながら感覚をつかむ。
 
+> **パスの読み替えについて**
+> このファイル内の `~/camel/` は、リポジトリの実際の場所に置き換えて読んでください。
+> 確認方法: `pwd` をリポジトリ内で実行するか、以下で変数にセットしておくと便利です。
+> ```bash
+> export CAMEL_DIR="/home/user/camel"   # ← 自分の環境に合わせて変更
+> echo $CAMEL_DIR  # 確認
+> ```
+> 以降のコマンドは `~/camel/` の代わりに `$CAMEL_DIR/` で動きます。
+
 ---
 
 ## Day 1（基盤構築）
@@ -17,13 +26,13 @@
 - [ ] **Hooksスクリプトをホームディレクトリにコピーする**
   ```bash
   mkdir -p ~/.claude/hooks ~/.claude/logs ~/.claude/templates
-  cp ~/camel/.claude/hooks/*.sh ~/.claude/hooks/
+  cp $CAMEL_DIR/.claude/hooks/*.sh ~/.claude/hooks/
   chmod +x ~/.claude/hooks/*.sh
   ```
 
 - [ ] **settings.json を配置する**
   ```bash
-  cp ~/camel/.claude/settings.json ~/.claude/settings.json
+  cp $CAMEL_DIR/.claude/settings.json ~/.claude/settings.json
   ```
 
 - [ ] **動作確認: 通知Hookをテスト**
@@ -42,6 +51,10 @@
 ### 確認ポイント
 - Claudeを起動したとき、CLAUDE.mdのルールが参照されているか
 - セッション終了後に `~/.claude/logs/` にログが作られているか
+  ```bash
+  ls ~/.claude/logs/          # ログファイルの存在確認
+  cat ~/.claude/logs/$(date +%Y-%m-%d).md  # 今日のログを確認
+  ```
 
 ---
 
@@ -59,7 +72,7 @@
 
 - [ ] **テンプレートをコピーしてローカルに保存**
   ```bash
-  cp ~/camel/.claude/templates/*.md ~/.claude/templates/
+  cp $CAMEL_DIR/.claude/templates/*.md ~/.claude/templates/
   ```
 
 ### 確認ポイント
