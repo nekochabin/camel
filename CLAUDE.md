@@ -118,6 +118,48 @@ Claude Codeを使う主な場面（優先度順）:
 
 ---
 
+## camel リポジトリの使い方メモ
+
+このリポジトリは **マルチエージェントAIフレームワーク**。
+2つのAIエージェントが役割を持ちながら対話しタスクを解くロールプレイ構造が特徴。
+
+### 主要ファイル早見表
+
+| ファイル | 役割 |
+|---------|------|
+| `examples/training_design.py` | 教材設計ロールプレイのサンプル（ホロ向けカスタム済み） |
+| `examples/ai_society/role_playing.py` | 元のサンプル（変更しない） |
+| `camel/prompts/ai_society/*.txt` | ロールプレイ用プロンプトテンプレート |
+| `camel/agents/role_playing.py` | RolePlaying クラス本体 |
+
+### よく変えるパラメータ（training_design.py）
+
+```python
+task_prompt = "..."          # 教材のテーマ
+assistant_role_name = "..."  # 専門家側の役割名
+user_role_name = "..."       # 依頼者側の役割名
+chat_turn_limit = 10         # 対話ターン数（増やすと詳細化）
+```
+
+### 実行方法
+
+```bash
+export OPENAI_API_KEY=<your_key>
+python examples/training_design.py
+```
+
+### camelを使わず直接Claudeで教材設計する場合
+
+`~/.claude/templates/training_design_prompt.md` の **セクション5** を使う。
+API不要・すぐ使える。
+
+### 変更時の注意
+
+- `camel/prompts/` 以下を変えると全サンプルに影響するため、**コピーして別ファイルで使う**
+- `chat_turn_limit` を50以上にすると長時間・高コストになる
+
+---
+
 ## サブエージェント（導入後に活用）
 
 | 名称 | 役割 | 書き込み権限 |
@@ -137,4 +179,4 @@ Claude Codeを使う主な場面（優先度順）:
 
 ---
 
-*最終更新: 2026-03-28*
+*最終更新: 2026-03-28（camelメモ追加）*
